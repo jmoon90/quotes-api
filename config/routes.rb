@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  root:to => "quotes#new"
+  root:to => "quotes#index"
   resources :quotes
+
+
+  namespace :api, :default => {:format => 'json'} do
+    namespace :v1 do
+      resources :quotes, :only => [:index, :show]
+    end
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
